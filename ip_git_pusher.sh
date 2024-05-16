@@ -2,7 +2,7 @@
 
 HOSTNAME=$(hostname -f)
 
-cd /home/pi/MBLUE-config
+cd /etc/MBLUE-config
 git pull origin main
 python ip_yaml_editor.py
 git add -A
