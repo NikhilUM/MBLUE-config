@@ -3,8 +3,16 @@ import yaml
 import socket
 import subprocess
 import os
-import git
+from git import Repo
 
+def git_update():
+    repo = Repo(PATH_OF_GIT_REPO)
+    repo.git.add(update=True)
+    repo.index.commit(COMMIT_MESSAGE)
+    origin = repo.remote(name='origin')
+    origin.pull()
+    origin.push()
+    
 def get_ip_address() -> str:
 
     try:
@@ -42,3 +50,6 @@ if __name__ == "__main__":
         yaml.dump(ip_addresses, file)
 
     print("Updated IP addresses: ", ip_addresses)
+    PATH_OF_GIT_REPO = r'/home/pi/MBLUE-config/.git'  # make sure .git folder is properly configured
+    COMMIT_MESSAGE = 'commit from gitpy'
+    git_update()
