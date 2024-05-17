@@ -30,7 +30,7 @@ def get_ip_address() -> str:
 
 if __name__ == "__main__":
 
-    with open("config.yaml", "r") as file:
+    with open("/home/pi/MBLUE-config/config.yaml", "r") as file:
         ip_addresses = yaml.safe_load(file)
 
     print("Existing IP addresses: ", ip_addresses)
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         elif "avani" in hostname.lower():
             ip_addresses["RPI_SYNC_IP"] = ip_address
 
-    with open("config.yaml", "w") as file:
+    with open("/home/pi/MBLUE-config/config.yaml", "w") as file:
         yaml.dump(ip_addresses, file)
 
     print("Updated IP addresses: ", ip_addresses)
