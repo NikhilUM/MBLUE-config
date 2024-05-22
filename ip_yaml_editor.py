@@ -5,12 +5,12 @@ import subprocess
 import os
 from git import Repo
 
-def git_pull():
+def git_pull(PATH_OF_GIT_REPO):
     repo = Repo(PATH_OF_GIT_REPO)
     origin = repo.remote(name='origin')
     origin.pull()
     
-def git_update():
+def git_update(PATH_OF_GIT_REPO):
     repo = Repo(PATH_OF_GIT_REPO)
     origin = repo.remote(name='origin')
     repo.git.add(update=True)
@@ -33,6 +33,8 @@ def get_ip_address() -> str:
     return _ip_address
 
 if __name__ == "__main__":
+    PATH_OF_GIT_REPO = r'/home/pi/MBLUE-config/.git'  # make sure .git folder is properly configured
+    git_pull(PATH_OF_GIT_REPO)
 
     with open("/home/pi/MBLUE-config/config.yaml", "r") as file:
         ip_addresses = yaml.safe_load(file)
@@ -54,6 +56,5 @@ if __name__ == "__main__":
         yaml.dump(ip_addresses, file)
 
     print("Updated IP addresses: ", ip_addresses)
-    PATH_OF_GIT_REPO = r'/home/pi/MBLUE-config/.git'  # make sure .git folder is properly configured
     COMMIT_MESSAGE = 'commit from gitpy'
-    git_update()
+    git_update(PATH_OF_GIT_REPO)
