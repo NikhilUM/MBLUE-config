@@ -5,12 +5,16 @@ import subprocess
 import os
 from git import Repo
 
-def git_update():
+def git_pull():
     repo = Repo(PATH_OF_GIT_REPO)
-    repo.git.add(update=True)
-    repo.index.commit(COMMIT_MESSAGE)
     origin = repo.remote(name='origin')
     origin.pull()
+    
+def git_update():
+    repo = Repo(PATH_OF_GIT_REPO)
+    origin = repo.remote(name='origin')
+    repo.git.add(update=True)
+    repo.index.commit(COMMIT_MESSAGE)    
     origin.push()
     
 def get_ip_address() -> str:
